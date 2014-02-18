@@ -74,12 +74,12 @@ $this->template->render('shared/set');
 $this->template->render('shared/get'));
 ```
 
-```
+```php
 // shared/set
 $template['foo'] = 'bar';
 ```
 
-```
+```php
 // shared/get
 echo $template['foo'];
 ```
@@ -90,7 +90,7 @@ echo $template['foo'];
 
 Your `post` template might look something like this:
 
-```
+```php
 <?php $template->extend('inheritence/blog', ['post' => $post])?>
 <h1><?=$post['name']?></h1>
 <p><?=$post['body']?></p>
@@ -98,7 +98,7 @@ Your `post` template might look something like this:
 
 When `post` template is rendered, the output will be passed to the `blog` template.
 
-```
+```php
 <!DOCTYPE html>
 <html>
     <head>
@@ -112,7 +112,7 @@ When `post` template is rendered, the output will be passed to the `blog` templa
 
 The original call to get the `post` template will produce the output of the `post` template wrapped in the `blog` template.
 
-```
+```php
 <!DOCTYPE html>
 <html>
     <head>
