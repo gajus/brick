@@ -63,8 +63,16 @@ class TemplateTest extends PHPUnit_Framework_TestCase {
         $this->assertSame('0', $this->template->render('parent'));
     }
 
-    public function testNoDefinedVariables () {
+    public function testDefaultDefinedVariables () {
         $this->assertSame('["template"]', $this->template->render('get_defined_vars'));
+    }
+
+    /**
+     * @expectedException Gajus\Brick\Exception\InvalidArgumentException
+     * @expectedExceptionMessage $template environment variable is reserved.
+     */
+    public function testOverwriteReservedVariable () {
+        $this->template->render('parent', ['template' => 'foo']);
     }
 
     public function testInjectedVariables () {
@@ -96,9 +104,12 @@ class TemplateTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testInheritenceUsingOutputBuffer () {
-
-
-
         $this->assertXmlStringEqualsXmlString('<!DOCTYPE html><html><head><title>a</title></head><body><h1>a</h1><p>b</p></body></html>', $this->template->render('inheritence/post', ['post' => ['name' => 'a', 'body' => 'b']]) );
+    }
+
+    public function testSharedVariable () {
+        $this->template->render('shared/set');
+
+        $this->assertSame('bar', $this->template->render('shared/get'));
     }
 }

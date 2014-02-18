@@ -8,7 +8,7 @@ namespace Gajus\Brick;
  * @link https://github.com/gajus/brick for the canonical source repository
  * @license https://github.com/gajus/brick/blob/master/LICENSE BSD 3-Clause
  */
-class Template {
+class Template implements \ArrayAccess {
     private
         /**
          * @var string Path to templates directory.
@@ -17,7 +17,11 @@ class Template {
         /**
          * @var string Templates that were rendered.
          */
-        $templates = [];
+        $templates = [],
+        /**
+         * @var array Shared environment variables accessible under $template variable.
+         */
+        $env = [];
 
     /**
      * Setting template directory will isolate all template resources
@@ -77,6 +81,10 @@ class Template {
 
         $this->templates[] = $name;
 
+        if (isset($env['template']) && $env['template'] !== $this) {
+            throw new Exception\InvalidArgumentException('$template environment variable is reserved.');
+        }
+
         $env['template'] = $this;
 
         ksort($env);
@@ -113,5 +121,42 @@ class Template {
         $name = str_replace('/', '__', $name);
 
         return $name;
+    }
+
+    /**
+     * @param string $offset
+     * @param mixed $value
+     * @return void
+     */
+    public function offsetSet ($offset, $value) {
+        if (!is_string($offset)) {
+            throw new Exception\InvalidArgumentException('Invalid parameter name.');
+        }
+
+        $this->env[$offset] = $value;
+    }
+
+    /**
+     * @param mixed $offset
+     * @return boolean
+     */
+    public function offsetExists ($offset) {
+        return isset($this->env[$offset]);
+    }
+
+    /**
+     * @param mixed $offset
+     * @return void
+     */
+    public function offsetUnset ($offset) {
+        unset($this->env[$offset]);
+    }
+
+    /**
+     * @param mixed $offset
+     * @return mixed
+     */
+    public function offsetGet ($offset) {
+        return $this->offsetExists($offset) ? $this->env[$offset] : null;
     }
 }

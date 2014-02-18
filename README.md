@@ -64,6 +64,26 @@ Beware that templates do not inherit variables from the parent scope. If `house`
 $template->render('room', get_defined_vars());
 ```
 
+### Shared variables
+
+There might be a case when you want to make certain variables accessible in all templates. In such case, you can use `$template` variable as an array.
+
+```php
+// application
+$this->template->render('shared/set');
+$this->template->render('shared/get'));
+```
+
+```
+// shared/set
+$template['foo'] = 'bar';
+```
+
+```
+// shared/get
+echo $template['foo'];
+```
+
 ### Inheritence
 
 Suppose you have a blog application, which consists of [post.tpl.php](tests/template/safe/inheritence/post.tpl.php) and [blog.inc.tpl.php](tests/template/safe/inheritence/blog.inc.tpl.php) templates.
