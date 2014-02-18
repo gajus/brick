@@ -25,8 +25,8 @@ The above does not require a great deal of documentation. The following examples
 // Instantiate Brick Template with an absolute path to the templates directory:
 $template = new \Gajus\Brick\Template(__DIR__ . '/template');
 
-// Refer to template files relative to the templates directory.
-// Brick requires to use `.tpl.php` file extension for the templates.
+// Refer to template files relative to the templates directory
+// Your template files must have `.tpl.php` file extension.
 // You must not include the file extension when referencing templates.
 $template->render('hello');
 ```
@@ -37,7 +37,7 @@ Inside the template, there will be `$template` variable that refers to the paren
 
 ```php
 // Get names of all the included templates,
-// e.g. in the case of the preceeding code, the output is ['hello'].
+// e.g. in the case of the preceeding code, the output is ["hello"].
 $template->getNames();
 
 // Include another template inside of this template:
@@ -62,4 +62,35 @@ Beware that templates do not inherit variables from the parent scope. If `house`
 // house.tpl.php
 
 $template->render('room', get_defined_vars());
+```
+
+### Inheritence
+
+Suppose you have a blog application, which consists of `post.tpl.php` and `blog.inc.tpl.php` templates.
+
+Your `post` template might look something like this:
+
+```
+<h1><?=$post['name']?></h2>
+
+<?=$post['body']?>
+
+<?=$template->render('blog')?>
+```
+
+Then your `blog` template can supress the previous output and inject it where it seen it fit:
+
+```
+<?php
+$body = ob_get_clean();
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <?=$body?>
+</body>
+</html>
 ```
