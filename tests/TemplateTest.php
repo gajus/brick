@@ -47,6 +47,10 @@ class TemplateTest extends PHPUnit_Framework_TestCase {
         ];
     }
 
+    public function testGetDirectory () {
+        $this->assertSame(__DIR__ . '/template/safe', $this->template->getDirectory());
+    }
+
     public function testPlain () {
         $this->assertSame('Hello, world', $this->template->render('hello'));
     }
