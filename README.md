@@ -75,7 +75,7 @@ Your `post` template might look something like this:
 
 <?=$post['body']?>
 
-<?=$template->render('blog')?>
+<?=$template->render('blog.inc')?>
 ```
 
 Then your `blog` template can supress the previous output and inject it where it seen it fit:
