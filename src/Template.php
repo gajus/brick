@@ -129,7 +129,7 @@ class Template implements \ArrayAccess {
      */
     public function offsetSet ($offset, $value) {
         if (!is_string($offset)) {
-            throw new Exception\InvalidArgumentException('Invalid parameter name.');
+            throw new Exception\InvalidArgumentException('Variable name is not a string.');
         }
 
         $this->env[$offset] = $value;
