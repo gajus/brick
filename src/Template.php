@@ -30,7 +30,7 @@ class Template {
         if (strpos($directory, '/') !== 0) {
             throw new Exception\InvalidArgumentException('Directory name must be an absolute path.');
         }
-        
+
         if (!is_dir($directory)) {
             throw new Exception\LogicException('Template directory does not exist.');
         }
@@ -49,10 +49,11 @@ class Template {
      * Get names of all templates that were rendedred using
      * this instance of Template.
      *
+     * @param boolean $translate
      * @return array
      */
-    public function getName () {
-        return $this->templates;
+    public function getNames ($translate = true) {
+        return $translate ? array_map(['static', 'translateName'], $this->templates) : $this->templates;
     }
 
     /**
@@ -74,7 +75,7 @@ class Template {
             throw new Exception\InvalidArgumentException('Directory traversal attempt.');
         }
 
-        $this->templates[] = static::parseName($name);
+        $this->templates[] = $name;
 
         $env['template'] = $this;
 
@@ -106,7 +107,7 @@ class Template {
      * @param string $name
      * @return string
      */
-    static private function parseName ($name) {
+    static private function translateName ($name) {
         #$file = trim(mb_substr($file, mb_strlen($this->directory)), '/');
         #$file = strstr($file, '.', true);
         $name = str_replace('/', '__', $name);

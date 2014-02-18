@@ -72,18 +72,33 @@ class TemplateTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testAppend () {
-        $this->assertSame('Hello, world', $this->template->render('append_hello'));
+        $this->assertSame('Hello, world', $this->template->render('append/hello'));
     }
 
     public function testAppendDoNotInheritEnv () {
-        $this->assertSame('["template"]', $this->template->render('append_get_defined_vars', ['a' => 'b']) );
+        $this->assertSame('["template"]', $this->template->render('append/get_defined_vars', ['a' => 'b']) );
     }
 
-    public function testGetTemplateName () {
+    public function testGetNames () {
         $this->assertSame('["template_name"]', $this->template->render('template_name') );
     }
 
-    public function testAppendGetTemplateName () {
-        $this->assertSame('["append_template_name","template_name"]', $this->template->render('append_template_name') );
+    public function testGetTranslatedNames () {
+        $this->assertSame('["template_name_translated"]', $this->template->render('template_name_translated') );
+    }
+
+    public function testAppendGetNames () {
+        $this->assertSame('["append\/template_name","template_name"]', $this->template->render('append/template_name') );
+    }
+
+    public function testAppendGetTranslatedNames () {
+        $this->assertSame('["append__template_name_translated","template_name_translated"]', $this->template->render('append/template_name_translated') );
+    }
+
+    public function testInheritenceUsingOutputBuffer () {
+
+
+
+        $this->assertXmlStringEqualsXmlString('<!DOCTYPE html><html><head><title>a</title></head><body><h1>a</h1><p>b</p></body></html>', $this->template->render('inheritence/post', ['post' => ['name' => 'a', 'body' => 'b']]) );
     }
 }

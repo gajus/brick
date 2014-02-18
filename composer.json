@@ -1,6 +1,6 @@
 {
 	"name": "gajus/brick",
-	"description": "",
+	"description": "Native PHP templates.",
 	"keywords": ["template"],
 	"homepage": "https://github.com/gajus/brick",
 	"type": "library",

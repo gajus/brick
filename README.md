@@ -13,5 +13,9 @@ $template = new \Gajus\Brick\Template(__DIR__ . '/template');
 $template->render('hello');
 ```
 
+## Template
+
 Inside the template, there will be `$template` variable that refers to the parent Template instance.
 
+```php
+$template->getNames(); // Get names of all the 

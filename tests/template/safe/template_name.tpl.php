@@ -1,2 +1,2 @@
 <?php
-echo json_encode($template->getName());
+echo json_encode($template->getNames(false));
