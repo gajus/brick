@@ -31,18 +31,11 @@ $template = new \Gajus\Brick\Template(__DIR__ . '/template');
 $template->render('hello');
 ```
 
-<<<<<<< HEAD
-## Template
-=======
 ### Template
->>>>>>> 70157775548e8b532040fa3753fa3ed8779b3bd0
 
 Inside the template, there will be `$template` variable that refers to the parent Template instance.
 
 ```php
-<<<<<<< HEAD
-$template->getNames(); // Get names of all the 
-=======
 // Get names of all the included templates,
 // e.g. in the case of the preceeding code, the output is ["hello"].
 $template->getNames();
@@ -73,32 +66,26 @@ $template->render('room', get_defined_vars());
 
 ### Inheritence
 
-Suppose you have a blog application, which consists of `post.tpl.php` and `blog.inc.tpl.php` templates.
+Suppose you have a blog application, which consists of [post.tpl.php](tests/template/safe/inheritence/post.tpl.php) and [blog.inc.tpl.php](tests/template/safe/inheritence/blog.inc.tpl.php) templates.
 
 Your `post` template might look something like this:
 
 ```
-<h1><?=$post['name']?></h2>
-
-<?=$post['body']?>
-
-<?=$template->render('blog.inc')?>
+<h1><?=$post['name']?></h1>
+<p><?=$post['body']?></p>
+<?=$template->render('inheritence/blog.inc', ['post' => $post, 'body' => ob_get_clean()])?>
 ```
 
 Then your `blog` template can supress the previous output and inject it where it seen it fit:
 
 ```
-<?php
-$body = ob_get_clean();
-?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title><?=$post['name']?></title>
 </head>
 <body>
     <?=$body?>
 </body>
 </html>
 ```
->>>>>>> 70157775548e8b532040fa3753fa3ed8779b3bd0
