@@ -21,7 +21,7 @@ The above does not require a great deal of documentation. The following examples
 
 ### Getting started
 
-```php
+```PHP
 // Instantiate Brick Template with an absolute path to the templates directory:
 $template = new \Gajus\Brick\Template(__DIR__ . '/template');
 
@@ -35,7 +35,7 @@ $template->render('hello');
 
 Inside the template, there will be `$template` variable that refers to the parent Template instance.
 
-```php
+```PHP
 // Get names of all the included templates,
 // e.g. in the case of the preceeding code, the output is ["hello"].
 $template->getNames();
@@ -48,9 +48,8 @@ echo $template->render('world');
 
 To assign a variable to your template, pass it as a second argument to `render` method.
 
-```php
+```PHP
 // your application logic
-
 $template->render('house', ['colour' => 'red']);
 ```
 
@@ -58,9 +57,8 @@ Inside the `house` template, the only two variables available will be `$template
 
 Beware that templates do not inherit variables from the parent scope. If `house` template includes `room` template, and you want all of the `house` scope variables to be copied to `room`, then you need to pass them using [get_defined_vars](http://php.net/get_defined_vars), e.g.
 
-```php
+```PHP
 // house.tpl.php
-
 $template->render('room', get_defined_vars());
 ```
 
@@ -68,18 +66,18 @@ $template->render('room', get_defined_vars());
 
 There might be a case when you want to make certain variables accessible in all templates. In such case, you can use `$template` variable as an array.
 
-```php
+```PHP
 // application
 $this->template->render('shared/set');
 $this->template->render('shared/get'));
 ```
 
-```php
+```PHP
 // shared/set
 $template['foo'] = 'bar';
 ```
 
-```php
+```PHP
 // shared/get
 echo $template['foo'];
 ```
@@ -90,7 +88,7 @@ echo $template['foo'];
 
 Your `post` template might look something like this:
 
-```php
+```HTML+PHP
 <?php $template->extend('inheritence/blog', ['post' => $post])?>
 <h1><?=$post['name']?></h1>
 <p><?=$post['body']?></p>
@@ -98,7 +96,7 @@ Your `post` template might look something like this:
 
 When `post` template is rendered, the output will be passed to the `blog` template.
 
-```php
+```HTML+PHP
 <!DOCTYPE html>
 <html>
     <head>
@@ -112,7 +110,7 @@ When `post` template is rendered, the output will be passed to the `blog` templa
 
 The original call to get the `post` template will produce the output of the `post` template wrapped in the `blog` template.
 
-```php
+```HTML+PHP
 <!DOCTYPE html>
 <html>
     <head>
