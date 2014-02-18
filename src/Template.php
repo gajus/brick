@@ -19,22 +19,14 @@ class Template {
          */
         $templates = [];
 
-    
-    public function __construct ($directory) {
-        $this->setDirectory($directory);
-
-        #$this->env['template'] = $this;
-    }
-
     /**
      * Setting template directory will isolate all template resources
      * to the chosen base path. This is implemented to prevent malicious
      * fs traversal.
      * 
      * @param string $directory Absolute pate to the template directory.
-     * @return void
      */
-    private function setDirectory ($directory) {
+    public function __construct ($directory) {
         if (!is_dir($directory)) {
             throw new Exception\LogicException('Template directory does not exist.');
         }
@@ -42,6 +34,9 @@ class Template {
         $this->directory = realpath($directory);
     }
 
+    /**
+     * @return string
+     */
     public function getDirectory () {
         return $this->directory;
     }
@@ -52,7 +47,7 @@ class Template {
      *
      * @return array
      */
-    public function getTemplates () {
+    public function getName () {
         return $this->templates;
     }
 
@@ -60,12 +55,12 @@ class Template {
      * Defines new scope for template execution using $evn variables and
      * executes the template script in an output buffer.
      *
-     * @param string $file File name (excluding file extension) relavite to the template directory.
+     * @param string $name File name (excluding file extension) relavite to the template directory.
      * @param array $env Variables populated in the template scope.
      * @return string Template output.
      */
-    public function render ($file, array $env = []) {
-    	$file = realpath($this->directory . '/' . $file . '.tpl.php');
+    public function render ($name, array $env = []) {
+    	$file = realpath($this->directory . '/' . $name . '.tpl.php');
 
         if (!$file) {
             throw new Exception\LogicException('Template does not exist.');
@@ -75,7 +70,13 @@ class Template {
             throw new Exception\InvalidArgumentException('Directory traversal attempt.');
         }
 
-        $view = new View ($file, $env);
+        $this->templates[] = static::parseName($name);
+
+        $env['template'] = $this;
+
+        ksort($env);
+
+        return static::renderView($file, $env);
 	}
 
     /**
@@ -86,7 +87,7 @@ class Template {
      *
      * @return string Template output.
      */
-    static private function render () {
+    static private function renderView () {
         extract(func_get_arg(1), \EXTR_REFS);
 
         ob_start();
@@ -98,14 +99,14 @@ class Template {
      * Return template name that is derived from the relative template file name, e.g.
      * "booking/form" will result in "booking__form".
      *
-     * @param string $file
+     * @param string $name
      * @return string
      */
-    private function parseName ($file) {
-        $file = trim(mb_substr($file, mb_strlen($this->directory)), '/');
-        $file = strstr($file, '.', true);
-        $file = str_replace('/', '__', $file);
+    static private function parseName ($name) {
+        #$file = trim(mb_substr($file, mb_strlen($this->directory)), '/');
+        #$file = strstr($file, '.', true);
+        $name = str_replace('/', '__', $name);
 
-        return $file;
+        return $name;
     }
 }
