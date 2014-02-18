@@ -127,6 +127,17 @@ class Template implements \ArrayAccess {
     }
 
     /**
+     * Shorthand method for rendering the template and printing the output.
+     * 
+     * @param string $name File name (excluding file extension) relavite to the template directory.
+     * @param array $env Variables populated in the template scope.
+     * @return void
+     */
+    public function append ($name, array $env = []) {
+        echo $this->append($name, $env);
+    }
+
+    /**
      * This method can be called only from template context. It will wait for the template to finish
      * and then pass the output via "output" $env parameter to the template.
      *
