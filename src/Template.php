@@ -27,6 +27,10 @@ class Template {
      * @param string $directory Absolute pate to the template directory.
      */
     public function __construct ($directory) {
+        if (strpos($directory, '/') !== 0) {
+            throw new Exception\InvalidArgumentException('Directory name must be an absolute path.');
+        }
+        
         if (!is_dir($directory)) {
             throw new Exception\LogicException('Template directory does not exist.');
         }

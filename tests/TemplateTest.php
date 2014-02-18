@@ -4,7 +4,47 @@ class TemplateTest extends PHPUnit_Framework_TestCase {
         $template;
 
     public function setUp () {
-        $this->template = new \Gajus\Brick\Template(__DIR__ . '/template');
+        $this->template = new \Gajus\Brick\Template(__DIR__ . '/template/safe');
+    }
+
+    /**
+     * @expectedException Gajus\Brick\Exception\LogicException
+     * @expectedExceptionMessage Template directory does not exist.
+     */
+    public function testDirectoryNotFound () {
+        new \Gajus\Brick\Template(__DIR__ . '/foobar');
+    }
+
+    /**
+     * @expectedException Gajus\Brick\Exception\InvalidArgumentException
+     * @expectedExceptionMessage Directory name must be an absolute path.
+     */
+    public function testRelativeDirectory () {
+        new \Gajus\Brick\Template('./foobar');
+    }
+
+    /**
+     * @expectedException Gajus\Brick\Exception\LogicException
+     * @expectedExceptionMessage Template does not exist.
+     */
+    public function testTemplateNotFound () {
+        $this->template->render('not_found');
+    }
+
+    /**
+     * @dataProvider testTraversalAttemptProvider
+     * @expectedException Gajus\Brick\Exception\InvalidArgumentException
+     * @expectedExceptionMessage Directory traversal attempt.
+     */
+    public function testTraversalAttempt ($name) {
+        $this->template->render($name);
+    }
+
+    public function testTraversalAttemptProvider () {
+        return [
+            ['../traversal'],
+            ['traversal']
+        ];
     }
 
     public function testPlain () {
