@@ -93,10 +93,9 @@ class Template implements \ArrayAccess {
 	}
 
     /**
-     * The additional static render method is used to prevent
-     * exposing $this and other Template properties to the template scope.
-     * Two variables (file and env) are captured using func_get_arg for
-     * the same reason of not exposing them to the template scope.
+     * The additional static render method is used to prevent exposing $this and other Template
+     * properties to the template scope. Two variables (file and env) are captured using func_get_arg
+     * for the same reason of not exposing them to the template scope.
      *
      * @return string Template output.
      */

@@ -91,6 +91,7 @@ Suppose you have a blog application, which consists of [post.tpl.php](tests/temp
 Your `post` template might look something like this:
 
 ```
+<?php ob_start()?>
 <h1><?=$post['name']?></h1>
 <p><?=$post['body']?></p>
 <?=$template->render('inheritence/blog.inc', ['post' => $post, 'body' => ob_get_clean()])?>
