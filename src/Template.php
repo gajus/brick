@@ -21,7 +21,11 @@ class Template implements \ArrayAccess {
         /**
          * @var array Shared environment variables accessible under $template variable.
          */
-        $env = [];
+        $env = [],
+        /**
+         * @var array $extending Populated when template requests to be wrapped in another template.
+         */
+        $extend = [];
 
     /**
      * Setting template directory will isolate all template resources
@@ -82,14 +86,29 @@ class Template implements \ArrayAccess {
         $this->templates[] = $name;
 
         if (isset($env['template']) && $env['template'] !== $this) {
-            throw new Exception\InvalidArgumentException('$template environment variable is reserved.');
+            throw new Exception\InvalidArgumentException('$template variable name is reserved.');
         }
 
         $env['template'] = $this;
 
         ksort($env);
 
-        return static::renderView($file, $env);
+        $output = static::renderView($file, $env);
+
+        if ($this->extend) {
+            $view_output = $output;
+            $output = '';
+
+            $extend = $this->extend;
+
+            $this->extend = [];
+
+            foreach ($extend as $render) {
+                $output .= $this->render($render[0], ['output' => $view_output] + $render[1]);
+            }
+        }
+
+        return $output;
 	}
 
     /**
@@ -105,6 +124,22 @@ class Template implements \ArrayAccess {
         ob_start();
         require func_get_arg(0);
         return ob_get_clean();
+    }
+
+    /**
+     * This method can be called only from template context. It will wait for the template to finish
+     * and then pass the output via "output" $env parameter to the template.
+     *
+     * @param string $name File name (excluding file extension) relavite to the template directory.
+     * @param array $env Variables populated in the template scope.
+     * @return void
+     */
+    private function extend ($name, array $env = []) {
+        if (isset($env['output'])) {
+            throw new Exception\InvalidArgumentException('$output variable name is reserved.');
+        }
+
+        $this->extend[] = [$name, $env];
     }
 
     /**

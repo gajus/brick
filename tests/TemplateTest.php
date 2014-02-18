@@ -69,7 +69,7 @@ class TemplateTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @expectedException Gajus\Brick\Exception\InvalidArgumentException
-     * @expectedExceptionMessage $template environment variable is reserved.
+     * @expectedExceptionMessage $template variable name is reserved.
      */
     public function testOverwriteReservedVariable () {
         $this->template->render('parent', ['template' => 'foo']);

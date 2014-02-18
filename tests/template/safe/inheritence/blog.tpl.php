@@ -4,6 +4,6 @@
     <title><?=$post['name']?></title>
 </head>
 <body>
-    <?=$body?>
+    <?=$output?>
 </body>
 </html>
