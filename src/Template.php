@@ -134,7 +134,7 @@ class Template implements \ArrayAccess {
      * @return void
      */
     public function append ($name, array $env = []) {
-        echo $this->append($name, $env);
+        echo $this->render($name, $env);
     }
 
     /**
