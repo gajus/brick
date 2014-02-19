@@ -19,9 +19,14 @@ class Template implements \ArrayAccess {
          */
         $templates = [],
         /**
-         * @var array Shared environment variables accessible under $template variable.
+         * @var array Shared environment variables accessible under the $template variable.
          */
         $env = [],
+        /**
+         * @todo Naming convention.
+         * @var array Shared environment variables imported to all templates (can be overwritten at the time of render).
+         */
+        $globals = [],
         /**
          * @var array $extending Populated when template requests to be wrapped in another template.
          */
@@ -33,8 +38,9 @@ class Template implements \ArrayAccess {
      * fs traversal.
      * 
      * @param string $directory Absolute pate to the template directory.
+     * @param array $globals Shared environment variables imported to all templates.
      */
-    public function __construct ($directory) {
+    public function __construct ($directory, array $globals = []) {
         if (strpos($directory, '/') !== 0) {
             throw new Exception\InvalidArgumentException('Directory name must be an absolute path.');
         }
@@ -44,6 +50,7 @@ class Template implements \ArrayAccess {
         }
 
         $this->directory = realpath($directory);
+        $this->globals = $globals;
     }
 
     /**
@@ -90,6 +97,8 @@ class Template implements \ArrayAccess {
         }
 
         $env['template'] = $this;
+
+        $env = $this->globals + $env;
 
         ksort($env);
 
