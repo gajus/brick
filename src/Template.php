@@ -92,7 +92,7 @@ class Template implements \ArrayAccess {
      * @return string Template output.
      */
     public function render ($name, array $env = []) {
-    	$file = realpath($this->directory . '/' . $name . '.tpl.php');
+    	$file = realpath($this->directory . '/' . $name . '.php');
 
         if (!$file) {
             throw new Exception\LogicException('Template does not exist.');

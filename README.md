@@ -26,7 +26,7 @@ The above does not require a great deal of documentation. The following examples
 $template = new \Gajus\Brick\Template(__DIR__ . '/template');
 
 // Refer to template files relative to the templates directory
-// Your template files must have `.tpl.php` file extension.
+// Your template files must have `.php` file extension.
 // You must not include the file extension when referencing templates.
 $template->render('hello');
 ```
@@ -58,7 +58,7 @@ Inside the `house` template, the only two variables available will be `$template
 Beware that templates do not inherit variables from the parent scope. If `house` template includes `room` template, and you want all of the `house` scope variables to be copied to `room`, then you need to pass them using [get_defined_vars](http://php.net/get_defined_vars), e.g.
 
 ```PHP
-// house.tpl.php
+// house
 $template->render('room', get_defined_vars());
 ```
 
@@ -122,3 +122,10 @@ The original call to get the `post` template will produce the output of the `pos
     </body>
 </html>
 ```
+
+## Undocumented changes
+
+Remind to myself of changes to document
+
+* added getName and getNames method
+* do not enforce .tpl.php extension
