@@ -72,6 +72,18 @@ class Template implements \ArrayAccess {
     }
 
     /**
+     * Get name of the current template.
+     *
+     * @param boolean $translate
+     * @return array
+     */
+    public function getName ($translate = true) {
+        $name = $this->templates[count($this->templates) - 1];
+
+        return $translate ? static::translateName($name) : $name;
+    }
+
+    /**
      * Defines new scope for template execution using $evn variables and
      * executes the template script in an output buffer.
      *
