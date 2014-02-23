@@ -123,6 +123,10 @@ The original call to get the `post` template will produce the output of the `pos
 </html>
 ```
 
+### Logging
+
+Brick implements [PSR-3](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md) `LoggerAwareInterface` for tracking Template object initialisation and individual template rendering.
+
 ## Undocumented changes
 
 Remind to myself of changes to document

@@ -8,8 +8,12 @@ namespace Gajus\Brick;
  * @link https://github.com/gajus/brick for the canonical source repository
  * @license https://github.com/gajus/brick/blob/master/LICENSE BSD 3-Clause
  */
-class Template implements \ArrayAccess {
+class Template implements \ArrayAccess, \Psr\Log\LoggerAwareInterface {
     private
+        /**
+         * @var Psr\Log\LoggerInterface
+         */
+        $logger,
         /**
          * @var string Path to templates directory.
          */
@@ -41,6 +45,10 @@ class Template implements \ArrayAccess {
      * @param array $globals Shared environment variables imported to all templates.
      */
     public function __construct ($directory, array $globals = []) {
+        if ($this->logger) {
+            $this->logger->debug('Initiating template.', ['method' => __METHOD__, 'directory' => $directory, 'globals' => $globals]);
+        }
+
         if (strpos($directory, '/') !== 0) {
             throw new Exception\InvalidArgumentException('Directory name must be an absolute path.');
         }
@@ -92,6 +100,10 @@ class Template implements \ArrayAccess {
      * @return string Template output.
      */
     public function render ($name, array $env = []) {
+        if ($this->logger) {
+            $this->logger->debug('Rendering template.', ['method' => __METHOD__, 'template' => $name]);
+        }
+
     	$file = realpath($this->directory . '/' . $name . '.php');
 
         if (!$file) {
@@ -152,7 +164,7 @@ class Template implements \ArrayAccess {
      * 
      * @param string $name File name (excluding file extension) relavite to the template directory.
      * @param array $env Variables populated in the template scope.
-     * @return void
+     * @return null
      */
     public function append ($name, array $env = []) {
         echo $this->render($name, $env);
@@ -164,7 +176,7 @@ class Template implements \ArrayAccess {
      *
      * @param string $name File name (excluding file extension) relavite to the template directory.
      * @param array $env Variables populated in the template scope.
-     * @return void
+     * @return null
      */
     private function extend ($name, array $env = []) {
         if (isset($env['output'])) {
@@ -192,7 +204,7 @@ class Template implements \ArrayAccess {
     /**
      * @param string $offset
      * @param mixed $value
-     * @return void
+     * @return null
      */
     public function offsetSet ($offset, $value) {
         if (!is_string($offset)) {
@@ -212,7 +224,7 @@ class Template implements \ArrayAccess {
 
     /**
      * @param mixed $offset
-     * @return void
+     * @return null
      */
     public function offsetUnset ($offset) {
         unset($this->env[$offset]);
@@ -224,5 +236,15 @@ class Template implements \ArrayAccess {
      */
     public function offsetGet ($offset) {
         return $this->offsetExists($offset) ? $this->env[$offset] : null;
+    }
+
+    /**
+     * Sets a logger instance on the object
+     *
+     * @param LoggerInterface $logger
+     * @return null
+     */
+    public function setLogger (\Psr\Log\LoggerInterface $logger) {
+        $this->logger = $logger;
     }
 }
