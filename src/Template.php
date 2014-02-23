@@ -45,10 +45,6 @@ class Template implements \ArrayAccess, \Psr\Log\LoggerAwareInterface {
      * @param array $globals Shared environment variables imported to all templates.
      */
     public function __construct ($directory, array $globals = []) {
-        if ($this->logger) {
-            $this->logger->debug('Initiating template.', ['method' => __METHOD__, 'directory' => $directory, 'globals' => $globals]);
-        }
-
         if (strpos($directory, '/') !== 0) {
             throw new Exception\InvalidArgumentException('Directory name must be an absolute path.');
         }
