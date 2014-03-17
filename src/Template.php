@@ -103,7 +103,12 @@ class Template implements \ArrayAccess, \Psr\Log\LoggerAwareInterface {
     	$file = realpath($this->directory . '/' . $name . '.php');
 
         if (!$file) {
-            throw new Exception\LogicException('Template does not exist.');
+            // @todo Document
+            $file = realpath($this->directory . '/' . $name . '/index.php');
+
+            if (!$file) {
+                throw new Exception\LogicException('Template does not exist.');
+            }
         }
 
         if (mb_strpos(realpath($file), $this->directory) !== 0) {
