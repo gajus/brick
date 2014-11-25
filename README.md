@@ -1,31 +1,28 @@
 # Brick
 
 [![Build Status](https://travis-ci.org/gajus/brick.png?branch=master)](https://travis-ci.org/gajus/brick)
-[![Coverage Status](https://coveralls.io/repos/gajus/brick/badge.png)](https://coveralls.io/r/gajus/brick)
+[![Coverage Status](https://coveralls.io/repos/gajus/brick/badge.png?branch=master)](https://coveralls.io/r/gajus/brick?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/gajus/brick/version.png)](https://packagist.org/packages/gajus/brick)
+[![License](https://poser.pugx.org/gajus/brick/license.png)](https://packagist.org/packages/gajus/brick)
 
-* Native PHP templates, no new syntax to learn.
+Native PHP template system that's fast, easy to use and easy to extend.
+
+* Plain PHP, no new syntax to learn.
 * Framework-agnostic, will work with any project.
-
-If the above definition seems familiar, it is because it is a copy-paste-scrap from [Plates](http://platesphp.com/) documentation. Brick is Plates without the bells and whistles, namely:
-
-* [Namespaced](http://platesphp.com/folders/) templates (because you can achieve this using folder structure).
-* [Sections](http://platesphp.com/sections/) or [Inheritance](http://platesphp.com/inheritance/) (because you can use [Output Buffering Control](http://uk3.php.net/manual/en/book.outcontrol.php) without the wrapping paper; see examples of how can you achieve the same).
-
-In addition to the above differences, Brick does not share variables between templates unless you [explicitly expand them](#variables).
 
 ## Documentation
 
-Brick does not interfere with your template code (for all Brick cares, you can have template driven website with no controllers). Nevertheless, Brick introduces convenience checks for handling not found template files, protecting you from [directory traversal attacks](http://en.wikipedia.org/wiki/Directory_traversal_attack) (at the template inclusion level), and helping to deal with variable scopes.
+Brick introduces convenience checks for handling not found template files, protecting you from [directory traversal attacks](http://en.wikipedia.org/wiki/Directory_traversal_attack) (at the template inclusion level), and helping to deal with variable scopes.
 
-The above does not require a great deal of documentation. The following examples together with the included [unit tests](tests/TemplateTest.php) will set you going. However, Please [raise an issue](https://github.com/gajus/brick/issues) if you feel that there are bits that need to be clarified.
+The following examples together with the included [unit tests](tests/TemplateTest.php) will set you going. Please [raise an issue](https://github.com/gajus/brick/issues) if you feel that there are bits that need to be clarified.
 
 ### Getting started
 
-```PHP
+```php
 // Instantiate Brick Template with an absolute path to the templates directory:
 $template = new \Gajus\Brick\Template(__DIR__ . '/template');
 
-// Refer to template files relative to the templates directory
+// Refer to the template files relative to the templates directory.
 // Your template files must have `.php` file extension.
 // You must not include the file extension when referencing templates.
 $template->render('hello');
@@ -33,9 +30,9 @@ $template->render('hello');
 
 ### Template
 
-Inside the template, there will be `$template` variable that refers to the parent Template instance.
+Inside the template, there will be a `$template` variable that refers to the parent Template instance.
 
-```PHP
+```php
 // Get names of all the included templates,
 // e.g. in the case of the preceeding code, the output is ["hello"].
 $template->getNames();
@@ -48,37 +45,37 @@ echo $template->render('world');
 
 To assign a variable to your template, pass it as a second argument to `render` method.
 
-```PHP
+```php
 // your application logic
 $template->render('house', ['colour' => 'red']);
 ```
 
 Inside the `house` template, the only two variables available will be `$template` and `$colour`.
 
-Beware that templates do not inherit variables from the parent scope. If `house` template includes `room` template, and you want all of the `house` scope variables to be copied to `room`, then you need to pass them using [get_defined_vars](http://php.net/get_defined_vars), e.g.
+Templates do not inherit variables from the parent scope. If `house` template includes `room` template, and you want all of the `house` scope variables to be copied to `room`, then you need to pass them using [get_defined_vars](http://php.net/get_defined_vars), e.g.
 
-```PHP
+```php
 // house
 $template->render('room', get_defined_vars());
 ```
 
 ### Shared variables
 
-There might be a case when you want to make certain variables accessible in all templates. In such case, you can use `$template` variable as an array.
+To make variables accessible in all templates, use `$template` variable as an array.
 
-```PHP
+```php
 // application
 $this->template->render('shared/set');
 $this->template->render('shared/get'));
 ```
 
-```PHP
-// shared/set
+```php
 $template['foo'] = 'bar';
 ```
 
-```PHP
-// shared/get
+You can access these values from any template:
+
+```php
 echo $template['foo'];
 ```
 
@@ -126,10 +123,3 @@ The original call to get the `post` template will produce the output of the `pos
 ### Logging
 
 Brick implements [PSR-3](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md) `LoggerAwareInterface` for tracking template rendering.
-
-## Undocumented changes
-
-Remind to myself of changes to document
-
-* added getName and getNames method
-* do not enforce .tpl.php extension
