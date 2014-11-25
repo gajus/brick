@@ -10,7 +10,11 @@ PHP template system that's fast, easy to use and easy to extend.
 * Plain PHP, no new syntax to learn.
 * Framework-agnostic, will work with any project.
 
-Brick introduces convenience checks for handling not found template files, protecting you from [directory traversal attacks](http://en.wikipedia.org/wiki/Directory_traversal_attack) (at the template inclusion level), and helping to deal with variable scopes.
+## Features
+
+* Handles not found template files
+* Protects from [directory traversal attacks](http://en.wikipedia.org/wiki/Directory_traversal_attack) (at the template inclusion level)
+* Isolates template execution scope
 
 The following examples together with the included [unit tests](https://github.com/gajus/brick/tree/master/tests) will set you going. Please [raise an issue](https://github.com/gajus/brick/issues) if you feel that there are bits that need to be clarified.
 
