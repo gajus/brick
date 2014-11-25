@@ -2,7 +2,7 @@
 namespace Gajus\Brick;
 
 /**
- * Responsible for resource resolution and scope management.
+ * Responsible for template resolution and scope management.
  *
  * @link https://github.com/gajus/brick for the canonical source repository
  * @license https://github.com/gajus/brick/blob/master/LICENSE BSD 3-Clause

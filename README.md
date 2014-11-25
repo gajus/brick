@@ -49,7 +49,7 @@ $system->setTemplateExtension('.tpl.php');
 
 ### Assigning Variables
 
-Scope variables are extracted to the execution context of the template, i.e. you can access 'foo' property as a regular variable `$foo` inside the template.
+Scope variables are extracted to the execution context of the template, i.e. template can access them as regular variables.
 
 ```php
 // template_that_is_using_foo_variable.php
@@ -70,3 +70,8 @@ Views produced using the same instance of the `System` have access to a `$global
 $system->getGlobals(['foo' => 'bar']);
 $system->view('template_that_is_using_foo_variable'); // 'bar'
 ```
+
+### View Scope
+
+* `$system` an instance of the system that produced the scope.
+* `$globals` variables shared across all views produced by the same instance of `System`.
