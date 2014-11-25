@@ -16,7 +16,7 @@ PHP template system that's fast, easy to use and easy to extend.
 >
 > Some of you might remember Chad Minick's article "[Simple PHP Template Engine](http://chadminick.com/articles/simple-php-template-engine.html)" (2009; Has it been that long?). I have been using a variation of an abstraction following the principles outlined in Chad's article for a long time. Brick is the final of the gang. I am happy with the API, I am happy with the inheritance rules, scope definition; it is perfect!
 >
-> I am using Brick in several freelance projects and I am making it open to others. Critique is welcome and I am looking for people-contributors who share the same mindset about what template handling in PHP should be.
+> I am using Brick in several freelance projects and I am making it open to others. I am looking for people who share the same mindset about what template processing in PHP should be. Contributors and critique is welcome.
 
 – http://www.reddit.com/r/PHP/comments/2nduuc/brick/
 
