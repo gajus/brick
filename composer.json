@@ -1,6 +1,7 @@
 {
 	"name": "gajus/brick",
-	"description": "Library for working with PHP templates.",
+	"version": "1.0.0",
+	"description": "PHP template system that's fast, easy to use and easy to extend.",
 	"keywords": ["template"],
 	"homepage": "https://github.com/gajus/brick",
 	"type": "library",
@@ -12,7 +13,7 @@
 		}
 	],
 	"require": {
-		"php": ">=5.5"
+		"php": ">=5.4"
 	},
 	"require-dev": {
 	    "satooshi/php-coveralls": "dev-master",

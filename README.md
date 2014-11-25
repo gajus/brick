@@ -5,7 +5,7 @@
 [![Latest Stable Version](https://poser.pugx.org/gajus/brick/version.png)](https://packagist.org/packages/gajus/brick)
 [![License](https://poser.pugx.org/gajus/brick/license.png)](https://packagist.org/packages/gajus/brick)
 
-Native PHP template system that's fast, easy to use and easy to extend.
+PHP template system that's fast, easy to use and easy to extend.
 
 * Plain PHP, no new syntax to learn.
 * Framework-agnostic, will work with any project.
