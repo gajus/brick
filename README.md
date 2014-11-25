@@ -12,8 +12,6 @@ PHP template system that's fast, easy to use and easy to extend.
 
 ## About Brick
 
-> This requires some explanation to do.
->
 > Brick is not a template engine that would lex/parse template as a string (think Twig). If you are using one, you must have a good reason (such as cross-platform template processing).
 >
 > Some of you might remember Chad Minick's article "[Simple PHP Template Engine](http://chadminick.com/articles/simple-php-template-engine.html)" (2009; Has it been that long?). I have been using a variation of an abstraction following the principles outlined in Chad's article for a long time. Brick is the final of the gang. I am happy with the API, I am happy with the inheritance rules, scope definition; it is perfect!
