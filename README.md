@@ -18,7 +18,7 @@ PHP template system that's fast, easy to use and easy to extend.
 
 The following examples together with the included [unit tests](https://github.com/gajus/brick/tree/master/tests) will set you going. Please [raise an issue](https://github.com/gajus/brick/issues) if you feel that there are bits that need to be clarified.
 
-## Getting Started
+## Overview
 
 `System` class is responsible for template resolution and scope management.
 
@@ -31,6 +31,8 @@ $system = new \Gajus\Brick\System($templates_directory);
 ```php
 $template = new \Gajus\Brick\Template($file, $scope);
 ```
+
+## Getting Started
 
 ### Producing a View
 
