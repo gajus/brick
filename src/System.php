@@ -119,7 +119,7 @@ class System {
         }
 
         $scope['globals'] = $this->getGlobals();
-        $scope['system'] = $this;
+        $scope['system'] = new Subsystem($this);
 
         return new Template($file, $scope);
     }
