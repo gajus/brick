@@ -1,8 +1,8 @@
 # Brick
 
-[![Build Status](https://travis-ci.org/gajus/brick.png?branch=master&1)](https://travis-ci.org/gajus/brick)
-[![Coverage Status](https://coveralls.io/repos/gajus/brick/badge.png?branch=master&1)](https://coveralls.io/r/gajus/brick?branch=master)
-[![Latest Stable Version](https://poser.pugx.org/gajus/brick/version.png?1)](https://packagist.org/packages/gajus/brick)
+[![Build Status](https://travis-ci.org/gajus/brick.png?branch=master&2)](https://travis-ci.org/gajus/brick)
+[![Coverage Status](https://coveralls.io/repos/gajus/brick/badge.png?branch=master&2)](https://coveralls.io/r/gajus/brick?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/gajus/brick/version.png?2)](https://packagist.org/packages/gajus/brick)
 [![License](https://poser.pugx.org/gajus/brick/license.png)](https://packagist.org/packages/gajus/brick)
 
 PHP template system that's fast, easy to use and easy to extend.
@@ -37,7 +37,9 @@ Public methods:
 
 ### Subsystem
 
-`Subsystem` class is responsible for template resolution and scope management. Views that are built with an instance of `System` will be using `Subsystem` to produce inner views. This restricts a template access to controlling the globals and other sensitive variables.
+`Subsystem` class is responsible for template resolution and scope management.
+
+Views that are built using an instance of `System` will be using `Subsystem` to produce inner views. This restricts a template access to controlling the globals and other sensitive variables.
 
 Public methods:
 
