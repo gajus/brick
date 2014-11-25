@@ -1,6 +1,6 @@
 {
 	"name": "gajus/brick",
-	"version": "1.0.0",
+	"version": "2.0.0",
 	"description": "PHP template system that's fast, easy to use and easy to extend.",
 	"keywords": ["template"],
 	"homepage": "https://github.com/gajus/brick",

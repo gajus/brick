@@ -1,2 +1,0 @@
-<?php
-$template['foo'] = 'bar';
