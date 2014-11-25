@@ -18,12 +18,12 @@ PHP template system that's fast, easy to use and easy to extend.
 
 The following examples together with the included [unit tests](https://github.com/gajus/brick/tree/master/tests) will set you going. Please [raise an issue](https://github.com/gajus/brick/issues) if you feel that there are bits that need to be clarified.
 
-## Getting started
+## Getting Started
 
 `System` class is responsible for template resolution and scope management.
 
 ```php
-$system = new \Gajus\Brick\System($template_directory);
+$system = new \Gajus\Brick\System($templates_directory);
 ```
 
 `Template` class is responsible for isolating template execution scope, extracting scope variables and capturing the output buffer.
@@ -35,11 +35,19 @@ $template = new \Gajus\Brick\Template($file, $scope);
 ### Producing a View
 
 ```php
+// Set the absolute path to the folder containing templates.
 $system = new \Gajus\Brick\System(__DIR__ . '/templates');
+// Refer to the template using a path relative to the template folder.
 echo $system->view('foo');
 ```
 
-### Variables
+Template file must have a ".php" extension. When referring to templates, do not include the file extension. You can change the name of the extension:
+
+```php
+$system->setTemplateExtension('.tpl.php');
+```
+
+### Assigning Variables
 
 Variables are assigned at the time of producing a view.
 
@@ -47,7 +55,7 @@ Variables are assigned at the time of producing a view.
 $system->view('template_that_is_using_foo_variable', ['foo' => 'bar']);
 ```
 
-Scope variables are extracted to the execution context of the template, i.e. you can access the 'foo' property as a regular variable `$foo` inside the template.
+Scope variables are extracted to the execution context of the template, i.e. you can access 'foo' property as a regular variable `$foo` inside the template.
 
 ```php
 // template_that_is_using_foo_variable.php
@@ -56,10 +64,9 @@ $foo; // 'bar'
 
 ### Globals
 
-Globals are variables shared across all views managed by the same instance of the `System`.
+Views produced using the same instance of the `System` have access to a `$globals` variables.
 
 ```php
 $system->getGlobals(['foo' => 'bar']);
+$system->view('template_that_is_using_foo_variable'); // 'bar'
 ```
-
-Now all views that are produced using this instance of `System` have access to `$globals['foo']` variable.
