@@ -51,6 +51,7 @@ $system->setTemplateExtension('.tpl.php');
 
 * `$system` an instance of the system that produced the scope.
 * `$globals` variables shared across all views produced by the same instance of `System`.
+* Variables assigned to the view at the time of producing the view.
 
 ### Assigning Variables
 
