@@ -98,40 +98,4 @@ class TemplateTest extends PHPUnit_Framework_TestCase {
     //public function testInheritenceUsingOutputBuffer () {
     //    $this->assertXmlStringEqualsXmlString('<!DOCTYPE html><html><head><title>a</title></head><body><h1>a</h1><p>b</p></body></html>', $this->template->render('inheritence/post', ['post' => ['name' => 'a', 'body' => 'b']]) );
     //}
-
-    public function testSetSharedVariable () {
-        $this->template['foo'] = 'bar';
-
-        $this->assertArrayHasKey('foo', $this->template);
-        $this->assertSame('bar', $this->template['foo']);
-    }
-
-    public function testIssetSharedVariable () {
-        $this->template['foo'] = 'bar';
-
-        $this->assertTrue(isset($this->template['foo']));
-        $this->assertFalse(isset($this->template['bar']));
-    }
-
-    /**
-     * @expectedException Gajus\Brick\Exception\InvalidArgumentException
-     * @expectedExceptionMessage Variable name is not a string.
-     */
-    public function testSetSharedVariableNotString () {
-        $this->template[0] = 'foo';
-    }
-
-    public function testUnsetSharedVariable () {
-        $this->template['foo'] = 'bar';
-
-        unset($this->template['foo']);
-
-        $this->assertArrayNotHasKey('foo', $this->template);
-    }
-
-    public function testSharedVariable () {
-        $this->template->render('shared/set');
-
-        $this->assertSame('bar', $this->template->render('shared/get'));
-    }
 }

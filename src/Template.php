@@ -8,7 +8,7 @@ namespace Gajus\Brick;
  * @link https://github.com/gajus/brick for the canonical source repository
  * @license https://github.com/gajus/brick/blob/master/LICENSE BSD 3-Clause
  */
-class Template implements \ArrayAccess, \Psr\Log\LoggerAwareInterface {
+class Template implements \Psr\Log\LoggerAwareInterface {
     private
         /**
          * @var Psr\Log\LoggerInterface
@@ -157,48 +157,9 @@ class Template implements \ArrayAccess, \Psr\Log\LoggerAwareInterface {
      * @return string
      */
     static private function translateName ($name) {
-        #$file = trim(mb_substr($file, mb_strlen($this->directory)), '/');
-        #$file = strstr($file, '.', true);
         $name = str_replace('/', '__', $name);
 
         return $name;
-    }
-
-    /**
-     * @param string $offset
-     * @param mixed $value
-     * @return null
-     */
-    public function offsetSet ($offset, $value) {
-        if (!is_string($offset)) {
-            throw new Exception\InvalidArgumentException('Variable name is not a string.');
-        }
-
-        $this->env[$offset] = $value;
-    }
-
-    /**
-     * @param mixed $offset
-     * @return boolean
-     */
-    public function offsetExists ($offset) {
-        return isset($this->env[$offset]);
-    }
-
-    /**
-     * @param mixed $offset
-     * @return null
-     */
-    public function offsetUnset ($offset) {
-        unset($this->env[$offset]);
-    }
-
-    /**
-     * @param mixed $offset
-     * @return mixed
-     */
-    public function offsetGet ($offset) {
-        return $this->offsetExists($offset) ? $this->env[$offset] : null;
     }
 
     /**
