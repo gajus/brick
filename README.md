@@ -10,7 +10,7 @@ PHP template system that's fast, easy to use and easy to extend.
 * Plain PHP, no new syntax to learn.
 * Framework-agnostic, will work with any project.
 
-## About
+## About Brick
 
 > This requires some explanation to do.
 >
