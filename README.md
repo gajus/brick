@@ -26,14 +26,14 @@ The following examples together with the included [unit tests](https://github.co
 
 Public methods:
 
-* setDirectory
-* getDirectory
-* setGlobals
-* getGlobals
-* setTemplateExtension
-* getTemplateExtension
-* view
-* template
+* [setDirectory](https://github.com/gajus/brick/blob/master/src/System.php)
+* [getDirectory](https://github.com/gajus/brick/blob/master/src/System.php)
+* [setGlobals](https://github.com/gajus/brick/blob/master/src/System.php)
+* [getGlobals](https://github.com/gajus/brick/blob/master/src/System.php)
+* [setTemplateExtension](https://github.com/gajus/brick/blob/master/src/System.php)
+* [getTemplateExtension](https://github.com/gajus/brick/blob/master/src/System.php)
+* [view](https://github.com/gajus/brick/blob/master/src/System.php)
+* [template](https://github.com/gajus/brick/blob/master/src/System.php)
 
 ### Subsystem
 
@@ -41,7 +41,7 @@ Public methods:
 
 Public methods:
 
-* view
+* [view](https://github.com/gajus/brick/blob/master/src/Subsystem.php)
 
 ### Template
 
@@ -49,7 +49,7 @@ Public methods:
 
 Public methods:
 
-* render
+* [render](https://github.com/gajus/brick/blob/master/src/Template.php)
 
 ## Getting Started
 
@@ -70,7 +70,7 @@ $system->setTemplateExtension('.tpl.php');
 
 #### View Scope
 
-* `$system` an instance of the system that produced the scope.
+* `$system` an instance of `Subsystem`.
 * `$globals` variables shared across all views produced by the same instance of `System`.
 * Variables assigned to the view at the time of producing the view.
 
