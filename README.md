@@ -20,17 +20,36 @@ The following examples together with the included [unit tests](https://github.co
 
 ## Overview
 
-### `System`
+### System
 
 `System` class is responsible for template resolution and scope management.
 
-### `Subsystem`
+Public methods:
+
+* setDirectory
+* getDirectory
+* setGlobals
+* getGlobals
+* setTemplateExtension
+* getTemplateExtension
+* view
+* template
+
+### Subsystem
 
 `Subsystem` class is responsible for template resolution and scope management. Views that are built with an instance of `System` will be using `Subsystem` to produce inner views. This restricts a template access to controlling the globals and other sensitive variables.
 
-### `Template`
+Public methods:
+
+* view
+
+### Template
 
 `Template` class is responsible for isolating template execution scope, extracting scope variables and capturing the output buffer.
+
+Public methods:
+
+* render
 
 ## Getting Started
 
