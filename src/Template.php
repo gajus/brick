@@ -30,11 +30,7 @@ class Template implements \ArrayAccess, \Psr\Log\LoggerAwareInterface {
          * @todo Naming convention.
          * @var array Shared environment variables imported to all templates (can be overwritten at the time of render).
          */
-        $globals = [],
-        /**
-         * @var array $extending Populated when template requests to be wrapped in another template.
-         */
-        $extend = [];
+        $globals = [];
 
     /**
      * Setting template directory will isolate all template resources
@@ -123,19 +119,6 @@ class Template implements \ArrayAccess, \Psr\Log\LoggerAwareInterface {
         ksort($env);
 
         $output = static::renderView($file, $env);
-
-        if ($this->extend) {
-            $view_output = $output;
-            $output = '';
-
-            $extend = $this->extend;
-
-            $this->extend = [];
-
-            foreach ($extend as $render) {
-                $output .= $this->render($render[0], ['output' => $view_output] + $render[1]);
-            }
-        }
 
         return $output;
     }

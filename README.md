@@ -82,47 +82,6 @@ You can access these values from any template:
 echo $template['foo'];
 ```
 
-### Inheritence
-
-`extend` method is used when you need template to wrap itself in another template, e.g. a blog application, which consists of [post](tests/template/safe/inheritence/post.tpl.php) and [blog](tests/template/safe/inheritence/blog.tpl.php) templates.
-
-Your `post` template might look something like this:
-
-```html+php
-<?php $template->extend('inheritence/blog', ['post' => $post])?>
-<h1><?=$post['name']?></h1>
-<p><?=$post['body']?></p>
-```
-
-When `post` template is rendered, the output will be passed to the `blog` template.
-
-```html+php
-<!DOCTYPE html>
-<html>
-    <head>
-        <title><?=$post['name']?></title>
-    </head>
-    <body>
-        <?=$output?>
-    </body>
-</html>
-```
-
-The original call to get the `post` template will produce the output of the `post` template wrapped in the `blog` template.
-
-```html+php
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>a</title>
-    </head>
-    <body>
-        <h1>a</h1>
-        <p>b</p>
-    </body>
-</html>
-```
-
 ### Logging
 
 Brick implements [PSR-3](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md) `LoggerAwareInterface` for tracking template rendering.
