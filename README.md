@@ -20,9 +20,17 @@ The following examples together with the included [unit tests](https://github.co
 
 ## Overview
 
-* `System` class is responsible for template resolution and scope management.
-* `Subsystem` class is responsible for template resolution and scope management. Views that are built with an instance of `System` will be using `Subsystem` to produce inner views. This restricts a template access to controlling the globals and other sensitive variables.
-* `Template` class is responsible for isolating template execution scope, extracting scope variables and capturing the output buffer.
+### `System`
+
+`System` class is responsible for template resolution and scope management.
+
+### `Subsystem`
+
+`Subsystem` class is responsible for template resolution and scope management. Views that are built with an instance of `System` will be using `Subsystem` to produce inner views. This restricts a template access to controlling the globals and other sensitive variables.
+
+### `Template`
+
+`Template` class is responsible for isolating template execution scope, extracting scope variables and capturing the output buffer.
 
 ## Getting Started
 
