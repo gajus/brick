@@ -100,18 +100,13 @@ class Template implements \ArrayAccess, \Psr\Log\LoggerAwareInterface {
             $this->logger->debug('Rendering template.', ['method' => __METHOD__, 'template' => $name]);
         }
 
-    	$file = realpath($this->directory . '/' . $name . '.php');
+        $file = realpath($this->directory . '/' . $name . '.php');
 
         if (!$file) {
-            // @todo Document
-            $file = realpath($this->directory . '/' . $name . '/index.php');
-
-            if (!$file) {
-                throw new Exception\LogicException('Template does not exist.');
-            }
+            throw new Exception\LogicException('Template ("' . $name . '") does not exist.');
         }
 
-        if (mb_strpos(realpath($file), $this->directory) !== 0) {
+        if (mb_strpos($file, $this->directory) !== 0) {
             throw new Exception\InvalidArgumentException('Directory traversal attempt.');
         }
 
@@ -143,7 +138,7 @@ class Template implements \ArrayAccess, \Psr\Log\LoggerAwareInterface {
         }
 
         return $output;
-	}
+    }
 
     /**
      * The additional static render method is used to prevent exposing $this and other Template
@@ -169,22 +164,6 @@ class Template implements \ArrayAccess, \Psr\Log\LoggerAwareInterface {
      */
     public function append ($name, array $env = []) {
         echo $this->render($name, $env);
-    }
-
-    /**
-     * This method can be called only from template context. It will wait for the template to finish
-     * and then pass the output via "output" $env parameter to the template.
-     *
-     * @param string $name File name (excluding file extension) relavite to the template directory.
-     * @param array $env Variables populated in the template scope.
-     * @return null
-     */
-    private function extend ($name, array $env = []) {
-        if (isset($env['output'])) {
-            throw new Exception\InvalidArgumentException('$output variable name is reserved.');
-        }
-
-        $this->extend[] = [$name, $env];
     }
 
     /**
