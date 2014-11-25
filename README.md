@@ -47,6 +47,11 @@ Template file must have a ".php" extension. When referring to templates, do not 
 $system->setTemplateExtension('.tpl.php');
 ```
 
+#### View Scope
+
+* `$system` an instance of the system that produced the scope.
+* `$globals` variables shared across all views produced by the same instance of `System`.
+
 ### Assigning Variables
 
 Scope variables are extracted to the execution context of the template, i.e. template can access them as regular variables.
@@ -70,8 +75,3 @@ Views produced using the same instance of the `System` have access to a `$global
 $system->getGlobals(['foo' => 'bar']);
 $system->view('template_that_is_using_foo_variable'); // 'bar'
 ```
-
-### View Scope
-
-* `$system` an instance of the system that produced the scope.
-* `$globals` variables shared across all views produced by the same instance of `System`.
