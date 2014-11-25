@@ -34,8 +34,11 @@ Inside the template, there will be a `$template` variable that refers to the par
 
 ```php
 // Get names of all the included templates,
-// e.g. in the case of the preceeding code, the output is ["hello"].
 $template->getNames();
+
+// Get name of the current template.
+$template->getName();
+// "hello"
 
 // Include another template inside of this template:
 echo $template->render('world');
