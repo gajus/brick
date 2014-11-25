@@ -49,17 +49,17 @@ $system->setTemplateExtension('.tpl.php');
 
 ### Assigning Variables
 
-Variables are assigned at the time of producing a view.
-
-```php
-$system->view('template_that_is_using_foo_variable', ['foo' => 'bar']);
-```
-
 Scope variables are extracted to the execution context of the template, i.e. you can access 'foo' property as a regular variable `$foo` inside the template.
 
 ```php
 // template_that_is_using_foo_variable.php
-$foo; // 'bar'
+$foo;
+```
+
+Scope variables are assigned at the time of producing a view.
+
+```php
+$system->view('template_that_is_using_foo_variable', ['foo' => 'bar']); // 'bar'
 ```
 
 ### Globals
