@@ -1,9 +1,8 @@
 # Brick
 
-[![Build Status](https://travis-ci.org/gajus/brick.png?branch=master&2)](https://travis-ci.org/gajus/brick)
-[![Coverage Status](https://coveralls.io/repos/gajus/brick/badge.png?branch=master&2)](https://coveralls.io/r/gajus/brick?branch=master)
-[![Latest Stable Version](https://poser.pugx.org/gajus/brick/version.png?2)](https://packagist.org/packages/gajus/brick)
-[![License](https://poser.pugx.org/gajus/brick/license.png)](https://packagist.org/packages/gajus/brick)
+[![Build Status](https://img.shields.io/travis/gajus/brick/master.svg)](https://travis-ci.org/gajus/strading)
+[![Coverage Status](https://img.shields.io/coveralls/gajus/brick/master.svg)](https://coveralls.io/r/gajus/strading?branch=master)
+[![Latest Stable Version](https://img.shields.io/packagist/v/gajus/brick.svg)](https://packagist.org/packages/gajus/strading)
 
 PHP template system that's fast, easy to use and easy to extend.
 
